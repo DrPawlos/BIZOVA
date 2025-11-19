@@ -90,6 +90,15 @@ Once redeployed, visit:
 - `https://your-app.vercel.app/auth/login` - Should show login page
 - `https://your-app.vercel.app/auth/sign-up` - Should show sign up page
 
+## About the "Ignored build scripts" Warning
+
+If you see this warning during Vercel deployment:
+```
+Warning: Ignored build scripts: sharp, unrs-resolver.
+```
+
+**This is normal and safe to ignore.** It's just informational and doesn't affect your deployment. These packages (`sharp` and `unrs-resolver`) are used by Next.js for image optimization and are handled correctly by Vercel.
+
 ## Still Having Issues?
 
 Run this locally to verify your build:
