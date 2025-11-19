@@ -35,7 +35,7 @@ export async function signUpWithProfileAndBusiness(formData: FormData) {
       email,
       password,
       options: {
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/protected`,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/dashboard`,
       },
     })
 
@@ -80,11 +80,28 @@ export async function signUpWithProfileAndBusiness(formData: FormData) {
     }
 
     revalidatePath('/', 'layout')
-    redirect('/protected')
+    redirect('/dashboard')
   } catch (error) {
     return {
       error: error instanceof Error ? error.message : 'An unexpected error occurred',
     }
   }
+}
+
+/**
+ * Server action to handle user logout
+ * Signs out the user and redirects to login page
+ */
+export async function logout() {
+  const supabase = await createClient()
+  
+  const { error } = await supabase.auth.signOut()
+  
+  if (error) {
+    return { error: error.message }
+  }
+  
+  revalidatePath('/', 'layout')
+  redirect('/auth/login')
 }
 

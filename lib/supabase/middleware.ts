@@ -42,9 +42,10 @@ export async function updateSession(request: NextRequest) {
     !user &&
     !request.nextUrl.pathname.startsWith('/auth') &&
     request.nextUrl.pathname !== '/' &&
-    !request.nextUrl.pathname.startsWith('/styles')
+    !request.nextUrl.pathname.startsWith('/styles') &&
+    !request.nextUrl.pathname.startsWith('/protected') // Keep protected for backward compatibility
   ) {
-    // no user, potentially respond by redirecting the user to the login page
+    // Redirect unauthenticated users to login page
     const url = request.nextUrl.clone()
     url.pathname = '/auth/login'
     return NextResponse.redirect(url)

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { SiteHeader } from "@/components/header";
+import { ConditionalHeader } from "@/components/conditional-header";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,7 +23,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} antialiased`}
       >
-        <SiteHeader />
+        <ConditionalHeader />
         {children}
       </body>
     </html>
